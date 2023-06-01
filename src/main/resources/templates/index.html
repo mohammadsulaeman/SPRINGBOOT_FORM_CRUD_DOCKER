@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Employee List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${employees}" class="container my-5">
+                <h1>Employee List</h1>
+                <p class="my-5">
+                    <a href="/showNewEmployeeForm" class="btn btn-primary">
+                        <i class="fas fa-user-plus ml-2"> Add Employee </i></a>
+
+                </p>
+
+                <form th:action="@{/search}">
+                    <input maxlength="32" size="32" type="text" th:name="employeeName"/>
+                    <button type="submit" class="btn btn-outline-primary">Cari
+                    </button>
+                </form>
+                <div class="btn-group">
+                    <a th:href="@{/export/pdf}" class="btn btn-primary"> <i class="fas fa-solid fa-file-pdf"> PDF </i></a>
+                    <a th:href="@{/export/excel}" class="btn btn-primary"> <i class="fas fa-solid fa-file-excel"> EXCEL </i></a>
+                    <a th:href="@{/export/csv}" class="btn btn-primary"> <i class="fas fa-solid fa-file-csv"> CSV </i></a>
+                </div>
+                <div class="col-md-10">
+                    <h2 th:case="null">No record found !!</h2>
+                    <div th:case="*">
+                        <table class="table table-bordered  table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Nip</th>
+                                <th>Status</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Tempat, Tanggal Lahir</th>
+                                <th>Address</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="employee : ${employees}">
+                                <td th:text="${employee.employeeName}"></td>
+                                <td th:text="${employee.employeeNip}"></td>
+                                <td th:text="${employee.employeeStatus}"></td>
+                                <td th:text="${employee.employeePhone}"></td>
+                                <td th:text="${employee.employeeEmail}"></td>
+                                <td th:text="${employee.employeeDob}"></td>
+                                <td th:text="${employee.employeeAddress}"></td>
+                                <td>
+                                    <a th:href="@{/showFormUpdateEmployee/{id}(id=${employee.employeeId})}"
+                                       class="btn btn-primary">
+                                        <i class="fas fa-user-edit ml-2"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/deleteEmployee/{id}(id=${employee.employeeId})}"
+                                       class="btn btn-primary">
+                                        <i class="fas fa-user-times ml-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

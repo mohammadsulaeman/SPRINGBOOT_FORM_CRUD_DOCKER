@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>All Employees</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+<div class="container">
+  <h1>Employee Management System</h1>
+  <hr>
+  <h2>Update Employee</h2>
+
+  <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{employeeId}" />
+
+    <input type="text" th:field="*{employeeName}"  class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{employeeNip}"  class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{employeeStatus}"  class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{employeePhone}"  class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{employeeEmail}"  class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{employeeDob}" class="form-control mb-4 col-4">
+
+    <input type="text" th:field="*{employeeAddress}"  class="form-control mb-4 col-4">
+
+    <button type="submit" class="btn btn-info col-2"> Update Employee</button>
+  </form>
+
+  <hr>
+
+  <a th:href="@{/}"> Back to Employee List</a>
+</div>
+</body>
+
+</html>
